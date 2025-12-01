@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Entradas de Productos</h1>
+  <a href="{% url 'entradaproducto_crear' %}">Registrar Entrada</a>
+  <ul>
+    {% for entrada in object_list %}
+      <li>
+        {{ entrada }}
+        <a href="{% url 'entradaproducto_detalle' entrada.pk %}">Ver</a>
+        <a href="{% url 'entradaproducto_editar' entrada.pk %}">Editar</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

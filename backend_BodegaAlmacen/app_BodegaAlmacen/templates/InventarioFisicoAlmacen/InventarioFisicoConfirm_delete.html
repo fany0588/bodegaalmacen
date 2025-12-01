@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Borrado de Inventario{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-danger text-white">
+            <h2 class="card-title">Confirmar Borrado de Registro de Inventario</h2>
+        </div>
+        <div class="card-body">
+            <p class="lead">¿Estás seguro de que deseas eliminar el registro de inventario del producto <strong>{{ object.producto.nombre_producto }}</strong> realizado el <strong>{{ object.fecha_inventario|date:"d/m/Y" }}</strong>?</p>
+            <p class="text-danger"><strong><i class="bi bi-exclamation-triangle-fill"></i> ¡Atención!</strong> Esta acción no se puede deshacer.</p>
+            
+            <div class="mt-4">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger me-2"><i class="bi bi-trash-fill"></i> Sí, eliminar</button>
+                    <a href="{% url 'inventario_list' %}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancelar</a>
+                </form>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <p>Producto: {{ object.producto.nombre_producto }}</p>
+            <p>Fecha de Inventario: {{ object.fecha_inventario|date:"d/m/Y" }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

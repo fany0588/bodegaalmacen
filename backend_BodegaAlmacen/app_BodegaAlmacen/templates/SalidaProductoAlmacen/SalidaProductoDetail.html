@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Detalle de Salida de Producto</h1>
+  <p>Producto: {{ object.producto }}</p>
+  <p>Cantidad: {{ object.cantidad }}</p>
+  <p>Fecha de Salida: {{ object.fecha_salida }}</p>
+  <p>Empleado que Despachó: {{ object.empleado_despacho }}</p>
+  <a href="{% url 'salidaproducto_list' %}">Volver a la Lista</a>
+{% endblock %}

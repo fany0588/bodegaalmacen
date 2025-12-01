@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Registro de Entradas de Producto - Gestión de Bodega{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0"><i class="bi bi-box-arrow-in-down" style="color: #198754;"></i> Registro de Entradas de Producto</h1>
+        <a href="{% url 'entrada_create' %}" class="btn btn-success"><i class="bi bi-plus-circle-fill"></i> Registrar Nueva Entrada</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            {% if object_list %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Fecha de entrada</th>
+                                <th scope="col">Proveedor</th>
+                                <th scope="col">Numero de la factura de compar</th>
+                                <th scope="col">Costo Unitario</th>
+                                <th scope="col">Empleado de recepcion</th>
+                                <th scope="col">Observaciones</th>
+                                <th scope="col" class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entrada in object_list %}
+                            <tr>
+                                <td>{{ entrada.id }}</td>
+                                <td>
+                                    <a href="{% url 'producto_detail' entrada.producto.pk %}" class="text-decoration-none">
+                                        <strong>{{ entrada.producto.nombre_producto }}</strong>
+                                    </a>
+                                    <br>
+                                    <small class="text-muted">SKU: {{ entrada.producto.codigo_sku }}</small>
+                                </td>
+                                <td>{{ entrada.cantidad_entrada }}</td>
+                                <td>{{ entrada.fecha_entrada|date:"d/m/Y H:i" }}</td>
+                                <td>{{ entrada.proveedor.nombre_proveedor|default:"-" }}</td>
+                                <td>{{ entrada.num_factura_compra|default:"-" }}</td>
+                                <td>{{ entrada.costo_unitario|default:"-" }}</td>
+                                <td>{{ entrada.empleado_recepcion.nombre|default:"-" }}</td>
+                                <td>{{ entrada.observaciones|default:"-" }}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'entrada_detail' entrada.pk %}" class="btn btn-sm btn-info" title="Ver Detalles"><i class="bi bi-eye"></i></a>
+                                    <a href="{% url 'entrada_edit' entrada.pk %}" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil-fill"></i></a>
+                                    <a href="{% url 'entrada_delete' entrada.pk %}" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash-fill"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center p-4">
+                    <p class="lead">No se han registrado entradas de productos todavía.</p>
+                    <p>Puedes empezar registrando la primera entrada.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

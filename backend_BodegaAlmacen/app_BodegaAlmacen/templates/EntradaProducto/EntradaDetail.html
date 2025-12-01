@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles de la Entrada - Gestión de Bodega{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0"><i class="bi bi-box-arrow-in-down" style="color: #198754;"></i> Detalles de la Entrada</h2>
+                    <a href="{% url 'entrada_list' %}" class="btn btn-sm btn-secondary">Volver al Listado</a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <a href="{% url 'producto_detail' object.producto.pk %}" class="text-decoration-none">{{ object.producto.nombre_producto }}</a>
+                    </h3>
+                    <p class="card-subtitle text-muted">SKU: {{ object.producto.codigo_sku }}</p>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Cantidad Recibida:</strong>
+                                    <span class="fs-5">{{ object.cantidad_entrada }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Fecha de Entrada:</strong>
+                                    <span>{{ object.fecha_entrada|date:"d/m/Y H:i:s" }}</span>
+                                </li>
+                                 <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Proveedor:</strong>
+                                    <a href="{% if object.proveedor %}{% url 'proveedor_detail' object.proveedor.pk %}{% else %}#{% endif %}" class="text-decoration-none">{{ object.proveedor.nombre_proveedor|default:"-" }}</a>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Responsable:</strong>
+                                     <span>{{ object.empleado_responsable.nombre_empleado|default:"-" }} {{ object.empleado_responsable.apellido_empleado|default:"" }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Lote:</strong>
+                                    <span>{{ object.lote|default:"-" }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Fecha de Vencimiento:</strong>
+                                    <span>{{ object.fecha_vencimiento|date:"d/m/Y"|default:"No aplica" }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Precio de Compra (Unitario):</strong>
+                                    <span>${{ object.precio_compra_unitario|default:"0.00" }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Costo Total:</strong>
+                                    <span>${{ object.costo_total|default:"0.00" }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="{% url 'entrada_edit' object.pk %}" class="btn btn-warning">
+                        <i class="bi bi-pencil-fill"></i> Editar
+                    </a>
+                    <a href="{% url 'entrada_delete' object.pk %}" class="btn btn-danger">
+                        <i class="bi bi-trash-fill"></i> Eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Listado de Proveedores - Gestión de Bodega{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0"><i class="bi bi-truck" style="color: #0d6efd;"></i> Listado de Proveedores</h1>
+        <a href="{% url 'proveedor_create' %}" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Añadir Nuevo Proveedor</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            {% if object_list %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre del Proveedor</th>
+                                <th scope="col">Contacto</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Direccion del proveedor</th>
+                                <th scope="col">RUC</th>
+                                <th scope="col">Pais de Origen</th>
+                                <th scope="col">Condiciones de Pago</th>
+                                <th scope="col" class="text-center">Tiempo de Entrega</th>
+                                <th scope="col" class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for proveedor in object_list %}
+                            <tr>
+                                <td>{{ proveedor.id }}</td>
+                                <td><strong>{{ proveedor.nombre_proveedor }}</strong></td>
+                                <td>{{ proveedor.contacto_persona|default:"-" }}</td>
+                                <td>{{ proveedor.telefono|default:"-" }}</td>
+                                <td>{{ proveedor.email|default:"-" }}</td>
+                                <td>{{ proveedor.direccion_proveedor|default:"-" }}</td>
+                                <td>{{ proveedor.ruc|default:"-" }}</td>
+                                <td>{{ proveedor.pais_origen|default:"-" }}</td>
+                                <td>{{ proveedor.condiciones_pago|default:"-" }}</td>
+                                <td class="text-center"><span class="badge bg-primary rounded-pill">{{ proveedor.tiempo_entrega_dias|default:"N/A" }} días</span></td>
+                                <td class="text-center">
+                                    <a href="{% url 'proveedor_detail' proveedor.pk %}" class="btn btn-sm btn-info" title="Ver Detalles"><i class="bi bi-eye"></i></a>
+                                    <a href="{% url 'proveedor_edit' proveedor.pk %}" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil-fill"></i></a>
+                                    <a href="{% url 'proveedor_delete' proveedor.pk %}" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash-fill"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center p-4">
+                    <p class="lead">No hay proveedores registrados todavía.</p>
+                    <p>Puedes empezar añadiendo el primero.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

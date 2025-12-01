@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Salidas de Productos</h1>
+  <a href="{% url 'salidaproducto_crear' %}">Registrar Salida</a>
+  <ul>
+    {% for salida in object_list %}
+      <li>
+        {{ salida }}
+        <a href="{% url 'salidaproducto_detalle' salida.pk %}">Ver</a>
+        <a href="{% url 'salidaproducto_editar' salida.pk %}">Editar</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

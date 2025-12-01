@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Confirmar Eliminación - Gestión de Bodega{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-danger shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="mb-0"><i class="bi bi-exclamation-triangle-fill"></i> Confirmar Eliminación</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">
+                        ¿Estás seguro de que quieres eliminar al empleado 
+                        <strong>"{{ object.nombre_empleado }} {{ object.apellido_empleado }}"</strong>?
+                    </p>
+                    <p class="text-muted">
+                        Esta acción es irreversible y podría afectar los registros históricos de movimientos o inventarios 
+                        asociados a este empleado. Se recomienda marcar al empleado como inactivo en lugar de eliminarlo 
+                        si deseas conservar el historial.
+                    </p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a href="{% url 'empleado_list' %}" class="btn btn-secondary me-md-2">
+                                <i class="bi bi-x-circle"></i> Cancelar y Volver al Listado
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash-fill"></i> Sí, estoy seguro. Eliminar.
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

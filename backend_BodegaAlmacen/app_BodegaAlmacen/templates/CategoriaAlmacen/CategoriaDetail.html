@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.nombre_categoria }} - Detalles de la Categoría{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0"><i class="bi bi-tag" style="color: #FF8C00;"></i> Detalles de la Categoría</h2>
+                    <a href="{% url 'categoria_list' %}" class="btn btn-sm btn-secondary">Volver al Listado</a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title mb-3">{{ object.nombre_categoria }}</h3>
+
+                    {% if object.descripcion_categoria %}
+                        <p class="card-text text-muted">{{ object.descripcion_categoria }}</p>
+                    {% else %}
+                        <p class="card-text text-muted fst-italic">No hay descripción disponible para esta categoría.</p>
+                    {% endif %}
+
+                    <hr>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Temperatura Ideal:</strong>
+                            <span>{{ object.temperatura_ideal|default:"No especificada" }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Tipo de Almacenamiento:</strong>
+                            <span>{{ object.tipo_almacenamiento|default:"No especificado" }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Material Peligroso:</strong>
+                            <span>
+                                {% if object.es_peligroso %}
+                                    <span class="badge bg-danger">Sí</span>
+                                {% else %}
+                                    <span class="badge bg-success">No</span>
+                                {% endif %}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="{% url 'categoria_edit' object.pk %}" class="btn btn-warning">
+                        <i class="bi bi-pencil-fill"></i> Editar
+                    </a>
+                    <a href="{% url 'categoria_delete' object.pk %}" class="btn btn-danger">
+                        <i class="bi bi-trash-fill"></i> Eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles de la Salida - Gestión de Bodega{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0"><i class="bi bi-box-arrow-up" style="color: #dc3545;"></i> Detalles de la Salida</h2>
+                    <a href="{% url 'salida_list' %}" class="btn btn-sm btn-secondary">Volver al Listado</a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <a href="{% url 'producto_detail' object.producto.pk %}" class="text-decoration-none">{{ object.producto.nombre_producto }}</a>
+                    </h3>
+                    <p class="card-subtitle text-muted">SKU: {{ object.producto.codigo_sku }}</p>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Cantidad Retirada:</strong>
+                                    <span class="fs-5">{{ object.cantidad_salida }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Fecha de Salida:</strong>
+                                    <span>{{ object.fecha_salida|date:"d/m/Y H:i:s" }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Destino:</strong>
+                                    <span>{{ object.get_tipo_destino_display }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Número de Pedido/Referencia:</strong>
+                                    <span>{{ object.numero_pedido|default:"-" }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Responsable:</strong>
+                                    <span>{{ object.empleado_responsable.nombre_empleado|default:"-" }} {{ object.empleado_responsable.apellido_empleado|default:"" }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="{% url 'salida_edit' object.pk %}" class="btn btn-warning">
+                        <i class="bi bi-pencil-fill"></i> Editar
+                    </a>
+                    <a href="{% url 'salida_delete' object.pk %}" class="btn btn-danger">
+                        <i class="bi bi-trash-fill"></i> Eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

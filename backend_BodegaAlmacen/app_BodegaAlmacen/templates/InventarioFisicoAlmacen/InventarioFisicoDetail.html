@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Detalle de Inventario Físico</h1>
+  <p>Producto: {{ object.producto }}</p>
+  <p>Cantidad Contada: {{ object.cantidad_contada }}</p>
+  <p>Fecha de Conteo: {{ object.fecha_conteo }}</p>
+  <p>Diferencia: {{ object.diferencia }}</p>
+  <p>Empleado que Contó: {{ object.empleado_conteo }}</p>
+  <a href="{% url 'inventario_list' %}">Volver a la Lista</a>
+{% endblock %}

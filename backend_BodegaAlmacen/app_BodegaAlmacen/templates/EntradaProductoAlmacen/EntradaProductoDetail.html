@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Detalle de Entrada de Producto</h1>
+  <p>Producto: {{ object.producto }}</p>
+  <p>Cantidad: {{ object.cantidad }}</p>
+  <p>Fecha de Entrada: {{ object.fecha_entrada }}</p>
+  <p>Empleado que Registró: {{ object.empleado_registro }}</p>
+  <a href="{% url 'entradaproducto_list' %}">Volver a la Lista</a>
+{% endblock %}
