@@ -43,7 +43,7 @@
                                 <td>{{ producto.peso_kg }}</td>
                                 <td>{{ producto.volumen_m3 }}</td>
                                 <td class="text-center">
-                                    <a href="{% url 'producto_detail' producto.pk %}" class="btn btn-sm btn-info" title="Ver Detalles"><i class="bi bi-eye"></i></a>
+                                    
                                     <a href="{% url 'producto_edit' producto.pk %}" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil-fill"></i></a>
                                     <a href="{% url 'producto_delete' producto.pk %}" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash-fill"></i></a>
                                 </td>

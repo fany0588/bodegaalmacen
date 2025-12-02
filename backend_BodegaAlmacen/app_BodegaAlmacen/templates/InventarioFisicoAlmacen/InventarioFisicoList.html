@@ -52,7 +52,7 @@
                             <td>{{ inventario.comentarios }}</td>
                             <td>{{ inventario.ultima_actualizacion|date:"d/m/Y H:i" }}</td>
                             <td class="text-center">
-                                <a href="{% url 'inventario_detail' inventario.pk %}" class="btn btn-info btn-sm" title="Ver Detalles"><i class="bi bi-eye-fill"></i></a>
+                                
                                 <a href="{% url 'inventario_edit' inventario.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="bi bi-pencil-fill"></i></a>
                                 <a href="{% url 'inventario_delete' inventario.pk %}" class="btn btn-danger btn-sm" title="Eliminar"><i class="bi bi-trash-fill"></i></a>
                             </td>
